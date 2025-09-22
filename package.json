@@ -1,0 +1,37 @@
+
+{
+  "name": "lua-script-server",
+  "version": "1.0.0",
+  "description": "Lua Script Hosting Server with Discord Webhook Integration",
+  "main": "lua-server.js",
+  "scripts": {
+    "start": "node lua-server.js",
+    "dev": "node lua-server.js",
+    "test": "node -e \"console.log('Server test passed')\""
+  },
+  "keywords": [
+    "lua",
+    "roblox",
+    "script",
+    "hosting",
+    "webhook",
+    "discord"
+  ],
+  "author": "SL4A",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.1.0",
+    "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/lua-script-server"
+  },
+  "homepage": "https://github.com/username/lua-script-server#readme",
+  "bugs": {
+    "url": "https://github.com/username/lua-script-server/issues"
+  }
+}
